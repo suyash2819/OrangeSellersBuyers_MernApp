@@ -16,17 +16,6 @@ const HeaderComponent = (props) => {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          {/* <Navbar.Text style={{ padding: "0px" }}>
-            <Link to="/" className="nav-link">
-              Register
-            </Link>
-          </Navbar.Text>
-          <Navbar.Text style={{ padding: "0px" }}>
-            <Link to="/about" className="nav-link">
-                Sigin In
-            </Link>
-          </Navbar.Text> */}
-
           {props.user ? (
             <>
               <Navbar.Text style={{ padding: "0px" }}>
@@ -36,13 +25,18 @@ const HeaderComponent = (props) => {
               </Navbar.Text>
               {props.user.usertype === "Seller" ? (
                 <Navbar.Text style={{ padding: "0px" }}>
-                  <Link className="nav-link" to="/profile">
+                  <Link
+                    className="nav-link"
+                    to={{
+                      pathname: `/profile/${props.user.username}`,
+                    }}
+                  >
                     Profile
                   </Link>
                 </Navbar.Text>
               ) : (
                 <Navbar.Text style={{ padding: "0px" }}>
-                  <Link className="nav-link" to="/profile">
+                  <Link className="nav-link" to="/getsellers">
                     Orange Sellers
                   </Link>
                 </Navbar.Text>
@@ -72,16 +66,6 @@ const HeaderComponent = (props) => {
           {props.user && (
             <Navbar.Text>Welcome {props.user.username}</Navbar.Text>
           )}
-          {/* <Navbar.Text style={{ padding: "0px" }}>
-            <Link to="/cart" className="nav-link">
-              <i className="fa fa-cart-plus" style={{ fontSize: "22px" }}></i>
-              {!!props.cartItems.length && (
-                <span className="badge badge-pill badge-primary">
-                  {props.cartItems.length}
-                </span>
-              )}
-            </Link>
-          </Navbar.Text> */}
         </Nav>
       </Navbar.Collapse>
     </Navbar>

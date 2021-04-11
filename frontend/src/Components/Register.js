@@ -18,42 +18,59 @@ const Register = () => {
     show: false,
   });
 
+  const validateFields = () => {
+    if (
+      userInfo.userPassword.toUpperCase() ===
+      userInfo.userConfirmPassword.toUpperCase()
+    )
+      return true;
+    else return false;
+  };
+
   const registerUser = () => {
-    axios
-      .post("http://localhost:9000/", {
-        password: userInfo.userPassword,
-        userEmail: userInfo.userEmail,
-        userType: userInfo.userType,
-        userName: userInfo.userName,
-      })
-      .then((res) => {
-        setShowAlert({
-          success: true,
-          message: res.data,
-          show: true,
-        });
-        setUserInfo({
-          userEmail: "",
-          userPassword: "",
-          userName: "",
-          userConfirmPassword: "",
-          userType: "",
-        });
-      })
-      .catch((err) => {
-        setShowAlert({
+    const bool = validateFields();
+
+    bool
+      ? axios
+          .post("http://localhost:9000/", {
+            password: userInfo.userPassword,
+            userEmail: userInfo.userEmail,
+            userType: userInfo.userType,
+            userName: userInfo.userName,
+          })
+          .then((res) => {
+            setShowAlert({
+              success: true,
+              message: res.data,
+              show: true,
+            });
+            setUserInfo({
+              userEmail: "",
+              userPassword: "",
+              userName: "",
+              userConfirmPassword: "",
+              userType: "",
+            });
+          })
+          .catch((err) => {
+            setShowAlert({
+              success: false,
+              message: err.message,
+              show: true,
+            });
+            setUserInfo({
+              userEmail: "",
+              userPassword: "",
+              userName: "",
+              userConfirmPassword: "",
+              userType: "",
+            });
+          })
+      : setShowAlert({
           success: false,
-          message: err.message,
+          message: "Password and confirm password does not match",
           show: true,
         });
-        setUserInfo({
-          userEmail: "",
-          userPassword: "",
-          userName: "",
-          userConfirmPassword: "",
-          userType: "",
-        });
-      });
   };
 
   const alertMessageDisplay = () => {
@@ -62,7 +79,7 @@ const Register = () => {
 
   return (
     <>
-      <Container>
+      <Container style={{ marginTop: "100px" }}>
         <Row className="justify-content-md-center">
           <Col md="5">
             <Card>
@@ -142,7 +159,6 @@ const Register = () => {
                   </Form.Group>
 
                   <Form.Group as={Col} controlId="formGridState">
-                    {/* <Form.Label>State</Form.Label> */}
                     <Form.Control
                       as="select"
                       defaultValue="Choose..."

@@ -23,7 +23,6 @@ const UserSignInComponent = (props) => {
   };
 
   const saveUser = (data) => {
-    console.log("called", data);
     const userdetails = {
       email: data.email,
       username: data.username,
@@ -75,7 +74,7 @@ const UserSignInComponent = (props) => {
       });
   };
   return (
-    <Container>
+    <Container style={{ marginTop: "100px" }}>
       <Row className="justify-content-md-center">
         <Col md="5">
           <Card>

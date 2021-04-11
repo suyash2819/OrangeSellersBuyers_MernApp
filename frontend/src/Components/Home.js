@@ -1,6 +1,5 @@
-import Header from "./Header";
 const Home = () => {
-  return <h1>hi</h1>;
+  return <h3 style={{ marginTop: "100px" }}>Go To Register or Sign In page</h3>;
 };
 
 export default Home;

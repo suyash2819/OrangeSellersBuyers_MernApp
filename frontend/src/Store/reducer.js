@@ -1,7 +1,6 @@
 const USER_INFO = "USER_INFO";
 
 export function userInfo(payload) {
-  console.log(payload);
   return {
     type: USER_INFO,
     payload,
